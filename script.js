@@ -1,52 +1,47 @@
-// Step 1: Wait for the page to load fully before running the code
-document.addEventListener("DOMContentLoaded", function () {
+// Step 1: Wait for the HTML document to fully load
+document.addEventListener('DOMContentLoaded', function() {
 
-    // Step 2: Select DOM elements
-    const addButton = document.getElementById("add-task-btn"); // "Add Task" button
-    const taskInput = document.getElementById("task-input");   // Input field
-    const taskList = document.getElementById("task-list");     // UL list container
+    // Step 2: Select DOM Elements
+    const addButton = document.getElementById('add-task-btn');
+    const taskInput = document.getElementById('task-input');
+    const taskList = document.getElementById('task-list');
 
-    // Step 3: Define the addTask function
+    // Step 3: Create the addTask function
     function addTask() {
-        // Get and clean up the user's input
         const taskText = taskInput.value.trim();
 
         // Check if input is empty
         if (taskText === "") {
-            alert("Please enter a task!");
+            alert("Please enter a task");
             return;
         }
 
-        // Step 4: Create a new list item
-        const li = document.createElement("li");
-        li.textContent = taskText;
+        // Step 4: Task Creation and Removal
+        const li = document.createElement('li'); // create new li element
+        li.textContent = taskText; // set its textContent to taskText
 
-        // Create a remove button
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "Remove";
-        removeBtn.className = "remove-btn";
+        const removeButton = document.createElement('button'); // create remove button
+        removeButton.textContent = "Remove"; // set textContent to “Remove”
+        removeButton.className = "remove-btn"; // give class name 'remove-btn'
 
-        // When the remove button is clicked, delete the task
-        removeBtn.onclick = function () {
+        // assign onclick event to remove button
+        removeButton.onclick = function() {
             taskList.removeChild(li);
         };
 
-        // Add the remove button inside the list item
-        li.appendChild(removeBtn);
-
-        // Add the list item to the task list
+        // append remove button to li, and li to taskList
+        li.appendChild(removeButton);
         taskList.appendChild(li);
 
-        // Clear the input field
+        // clear input field
         taskInput.value = "";
     }
 
-    // Step 5: Add event listeners
-    addButton.addEventListener("click", addTask);
+    // Step 5: Attach Event Listeners
+    addButton.addEventListener('click', addTask); // when button is clicked
 
-    // Allow pressing Enter key to add tasks
-    taskInput.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
+    taskInput.addEventListener('keypress', function(event) { // when Enter is pressed
+        if (event.key === 'Enter') {
             addTask();
         }
     });
